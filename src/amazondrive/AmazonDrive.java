@@ -17,9 +17,8 @@ public class AmazonDrive {
     
     public static void main(String[] args) {
       bodega=new BodegaDrive();
-        for (int i = 0; i < 10; i++) {
-             bodega.RecogerEstante();
-        }
+     bodega.RecogerEstante(bodega.getProductos(),0,1);
+       
      
        
   
