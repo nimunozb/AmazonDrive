@@ -12,14 +12,23 @@ package amazondrive;
 public class Posicion {
     private int streed;
     private int avenue;
+    private int estante;
 
     public Posicion() {
+    }
+
+    public Posicion(int streed, int avenue, int estante) {
+        this.streed = streed;
+        this.avenue = avenue;
+        this.estante = estante;
     }
 
     public Posicion(int streed, int avenue) {
         this.streed = streed;
         this.avenue = avenue;
     }
+
+    
 
     public int getStreed() {
         return streed;
@@ -35,6 +44,14 @@ public class Posicion {
 
     public void setAvenue(int avenue) {
         this.avenue = avenue;
+    }
+
+    public int getEstante() {
+        return estante;
+    }
+
+    public void setEstante(int estante) {
+        this.estante = estante;
     }
     
     

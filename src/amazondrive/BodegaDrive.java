@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package amazondrive;
+import java.util.TreeMap;
 import becker.robots.*;
+import java.util.ArrayList;
 /**
  *
  * @author Horacio
@@ -14,8 +16,13 @@ public class BodegaDrive {
     private  Estantes [] estante=new Estantes [20];
     private  RobotDrive [] robotdrive=new RobotDrive[10];
    private Empleados [] empleado=new Empleados[2];
-    private Productos [] productos=new Productos[2];
-    public BodegaDrive() {
+   private TreeMap<Integer,Productos>productosBodega;
+  private   Productos[] produtosaIngresar=new Productos[10];
+   
+    /**
+     * @deprecated: inicializa todos los objetos que estan dentro de la bodega
+     */
+public BodegaDrive() {
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////        
    //colocacion de paredes     
         
@@ -58,8 +65,8 @@ public class BodegaDrive {
       }}
  int j=5;int k=0;int kj=9;         
    while(j<15&&k<10&&kj<20){
-   this.estante[k]=new Estantes(2, j);
-    this.estante[kj]=new Estantes(3, j);
+   this.estante[k]=new Estantes(2, j,k);
+    this.estante[kj]=new Estantes(3, j,kj);
     j++;k++;kj++;
    }
 
@@ -80,37 +87,39 @@ public class BodegaDrive {
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //colocacion de productos
+     produtosaIngresar[0]=new Productos("Refisal","Canasta Familiar");
+     produtosaIngresar[1]=new Productos("Samsung Galaxy j7","tecnologia");
+      produtosaIngresar[2]=new Productos("Maus","Tecnologia");
+     produtosaIngresar[3]=new Productos("computador","tecnologia");
+      produtosaIngresar[4]=new Productos("pasta","Canasta Familiar");
+     produtosaIngresar[5]=new Productos("smart tv","tecnologia");
+      produtosaIngresar[6]=new Productos("huevosFricar","Canasta Familiar");
+     produtosaIngresar[7]=new Productos("Multimetro fuke","tecnologia");
+      produtosaIngresar[8]=new Productos("lecheecono","Canasta Familiar");
+     produtosaIngresar[9]=new Productos("Play station 5","tecnologia");
+     
     
-    productos[0]=new Productos("Refisal","Canasta Familiar");
-    productos[1]=new Productos("Samsung Galaxy j7","tecnologia");
     
     }
-    
-     public Estantes[] getEstante() {
+public Estantes[] getEstante() {
         return estante;
     }
-
-    public void setEstante(Estantes[] estante) {
+public void setEstante(Estantes[] estante) {
         this.estante = estante;
     }
-
-    public RobotDrive[] getRobotdrive() {
+ public RobotDrive[] getRobotdrive() {
         return robotdrive;
     }
-
-    public void setRobotdrive(RobotDrive[] robotdrive) {
+public void setRobotdrive(RobotDrive[] robotdrive) {
         this.robotdrive = robotdrive;
     }
-
-    public City getCity() {
+public City getCity() {
         return this.city;
     }
-
-    public void setCity(City city) {
+public void setCity(City city) {
         this.city = city;
     }
-    
-    public int robotsDisponibles(){
+public int robotsDisponibles(){
         for (int i = 0; i < 10; i++) {
             if(robotdrive[i].isEstado()==false){
                 return i;
@@ -119,53 +128,61 @@ public class BodegaDrive {
         }
      return 990;   
     }
-
-    public Empleados[] getEmpleado() {
+public Empleados[] getEmpleado() {
         return empleado;
     }
-
-    public void setEmpleado(Empleados[] empleado) {
+public void setEmpleado(Empleados[] empleado) {
         this.empleado = empleado;
     }
-
-    public Productos[] getProductos() {
-        return productos;
-    }
-
-    public void setProductos(Productos[] productos) {
-        this.productos = productos;
-    }
-    
-    public void caminata(int a,String x){
+public void caminata(int b,int a,String x){
         for (int i = 0; i < a; i++) {
-            robotdrive[a].getRobotDrive().move();
-        }robotdrive[a].face(x);
+            robotdrive[b].getRobotDrive().move();
+        }robotdrive[b].face(x);
         
     }
-    
-    public  int estantesDisponibles (){
+public  int estantesDisponibles (){
      for (int i = 0; i < 20; i++) {
          for (int j = 0; j < 3; j++) {
              for (int k = 0; k < 7; k++) {
                if (this.estante[i].getcajonProducto()[j][k]==null&&this.estante[i].isEstado()==false){
                  return i;
                }}}}    
-   return 900; 
+   return -1; 
 }
+public TreeMap<Integer, Productos> getProductosBodega() {
+        return productosBodega;
+    }
+public void setProductosBodega(TreeMap<Integer, Productos> productosBodega) {
+        this.productosBodega = productosBodega;
+    }
+public Productos[] getProdutosaIngresar() {
+        return produtosaIngresar;
+    }
+public void setProdutosaIngresar(Productos[] produtosaIngresar) {
+        this.produtosaIngresar = produtosaIngresar;
+    }
+
     /**
      * @deprecated: funcion creada para buscar un producto[i] en todos los estantes 
-     * @param numerodeproducto
+     * @param:Productos producto
      * @return 
      */
-    public int buscarInventarioProducto(int numerodeproducto){
-         for (int i = 0; i < 20; i++) {
+    public Posicion buscarInventarioProducto(Productos producto){
+       for (int i = 0; i < 20; i++) {
          for (int j = 0; j < 3; j++) {
              for (int k = 0; k < 7; k++) {
-               if (this.estante[i].getcajonProducto()[j][k]==this.productos[numerodeproducto]&&productos[numerodeproducto].isEntregado()==false){
-                 return i;
-               }}}}    
-        System.out.println("No se pudo encotrar el estante");
-         return 900; //valor 
+               if (this.estante[i].getcajonProducto()[j][k]==producto&&this.estante[i].getcajonProducto()[j][k].isEntregado()==false){
+                 this.estante[i].getcajonProducto()[j][k].setEntregado(true);
+                 
+                 producto.getPosicionProducto().setEstante(i);
+                  producto.getPosicionProducto().setAvenue(j);
+                   producto.getPosicionProducto().setStreed(k);
+                 
+                   return producto.getPosicionProducto();
+                   
+                   
+               }}}}  
+       return null ;
     }
 
    public  void RecogerEstante(Productos producto[],int productodeInicio, int productoFinal){
@@ -219,7 +236,7 @@ public class BodegaDrive {
        }
      
     empleado[0].almacenarProducto(producto, productodeInicio, productoFinal, estante[b]);
-      robotdrive[a].face(e);robotdrive[a].getRobotDrive().move();robotdrive[a].getRobotDrive().move();robotdrive[a].face(n);
+     robotdrive[a].face(e);robotdrive[a].getRobotDrive().move();robotdrive[a].getRobotDrive().move();robotdrive[a].face(n);
    
     as=robotdrive[a].getRobotDrive().getStreet()-estante[b].getPosicion().getStreed();
        for (int i = 0; i < as; i++) {
@@ -251,8 +268,31 @@ public class BodegaDrive {
         
    }
  
-  public void enviarProducto(Productos producto){
+  public void enviarProducto(ArrayList<Posicion>posicion){
+     String n="NORTH";
+     String s="SOUTH";
+     String e="EAST";
+     String w="WEST";
+     int a=robotsDisponibles();
+     int b=posicion.get(0).getEstante();
+     robotdrive[a].setEstado(true);
+     estante[b].setEstado(true);
+    robotdrive[a].setDir(1);
+     robotdrive[a].face(n);
+     robotdrive[a].getRobotDrive().move();
+     robotdrive[a].face(e);
+    
+     int as= 15-robotdrive[a].getRobotDrive().getAvenue();
+     caminata(a,as,n);
+     as=robotdrive[a].getRobotDrive().getStreet()-estante[b].getPosicion().getStreed();
+    caminata(a,as,w);
       
+    as=robotdrive[a].getRobotDrive().getAvenue()-estante[b].getPosicion().getAvenue();
+       for (int i = 0; i < as; i++) {
+           robotdrive[a].getRobotDrive().move();
+       }if(robotdrive[a].getRobotDrive().canPickThing()==true){robotdrive[a].getRobotDrive().pickThing();}
+     
+     
       
   }
 

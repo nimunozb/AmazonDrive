@@ -26,13 +26,13 @@ public class Estantes {
     public Estantes() {
     }
 
-    public Estantes(int a, int b) {
+    public Estantes(int a, int b, int identificador) {
        setPosicion(a, b);
        this.estado=false;
+       this.identificador=identificador;
     }
 
    
-
     public int getIdentificador() {
         return identificador;
     }
@@ -47,6 +47,7 @@ public class Estantes {
 
     public void setcajonProducto(Productos[] producto, int a, int b, int c) {
         this.cajonProducto[a][b] = producto[c];
+      
     }
 
     public Posicion getPosicion() {
@@ -64,8 +65,8 @@ public class Estantes {
     }
 
     public Posicion compartimentosDisponibles(){
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 7; j++) {
                if(this.cajonProducto[i][j]==null){
                    this.posiciondelcajon.setStreed(i);
                    this.posiciondelcajon.setAvenue(j);

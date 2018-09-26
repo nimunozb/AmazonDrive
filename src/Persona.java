@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package amazondrive;
 
 /**
  *
  * @author Horacio
  */
-public class Cliente {
+class Persona {
     
 }

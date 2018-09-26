@@ -44,7 +44,7 @@ public class Empleados {
         
         while(cajon<3&&compartimento<7&&productodeinicio<=productoFinal){
             estante.setcajonProducto(producto, cajon, compartimento, productodeinicio);
-            System.out.println("Se ha guardado el producto"+producto[productodeinicio].getNombre()+" en el estante "+estante.getIdentificador()+
+            System.out.println("Se ha guardado el producto "+producto[productodeinicio].getNombre()+" en el estante "+estante.getIdentificador()+
                      " en el cajon "+cajon+" en el comtimento "+compartimento);
                if (compartimento==6){cajon++;compartimento=-1;}
           compartimento++;productodeinicio++;
