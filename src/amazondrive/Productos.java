@@ -16,7 +16,8 @@ public class Productos {
     private String tipo;
     private boolean entregado;
 
-    public Productos(String nombre, String tipo) {
+    public Productos(int identificador,String nombre, String tipo) {
+        this.identificador=identificador;
         this.nombre = nombre;
         this.tipo = tipo;
         this.entregado=false;

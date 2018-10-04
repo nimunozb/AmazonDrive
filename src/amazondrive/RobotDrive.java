@@ -65,14 +65,18 @@ public class RobotDrive {
 
   
    
+/**
+ * @deprecated: este metodo lo creo andre para poner el robot en la direccion que uno quiera
+ * 1=norte,2=oriente;3=sur; 4= occidente
+ * @param a 
+ */
 
-
-  public  void face(String a){
+  public  void face(String direccion){
           
-    switch(a)   {
+    switch(direccion)   {
         case"NORTH": if (dir==4) {
                 this.robotDrive.turnLeft();
-                this.robotDrive.turnLeft();
+                this.robotDrive.turnLeft();//diselo al andres, embuste juego de condiciones
                 this.robotDrive.turnLeft();
             }
             if (dir==3) {

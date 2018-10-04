@@ -10,5 +10,6 @@ package amazondrive;
  * @author Horacio
  */
 public class Factura {
-    
+    //no he comensado ha programar esto pero debe imprimir la compra con los datos de la persona y los datos del producto que compro
+    //en Uml especifico la relacionn
 }

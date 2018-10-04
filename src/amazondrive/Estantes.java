@@ -63,17 +63,21 @@ public class Estantes {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-
+/**
+ *@deprecated: este metodo busca los los compartimentos dentro de los cajones en los estantes que estan disponibles 
+ *
+ * @return 
+ */
     public Posicion compartimentosDisponibles(){
         for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 7; j++) {
+            for (int j = 0; j < 7; j++) //recorre todos los cajones y los compartimentos de los cajones de un estante
                if(this.cajonProducto[i][j]==null){
                    this.posiciondelcajon.setStreed(i);
                    this.posiciondelcajon.setAvenue(j);
                    return this.posiciondelcajon;
                }
             }
-        }
+        
         
         return null;
     }
