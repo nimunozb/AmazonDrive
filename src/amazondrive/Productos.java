@@ -15,6 +15,8 @@ public class Productos {
     private Posicion posicionProducto;
     private String tipo;
     private boolean entregado;
+    private boolean ingresado;
+   
 
     public Productos(int identificador,String nombre, String tipo) {
         this.identificador=identificador;
@@ -23,6 +25,25 @@ public class Productos {
         this.entregado=false;
     }
 
+    public Productos(String nombre, int identificador, Posicion posicionProducto, String tipo, boolean entregado, boolean ingresado) {
+        this.nombre = nombre;
+        this.identificador = identificador;
+        this.posicionProducto = posicionProducto;
+        this.tipo = tipo;
+        this.entregado = entregado;
+        this.ingresado = ingresado;
+    }
+
+    public Productos(int identificador,String nombre , String tipo, boolean entregado, boolean ingresado) {
+        this.nombre = nombre;
+        this.identificador = identificador;
+        this.tipo = tipo;
+        this.entregado = entregado;
+        this.ingresado = ingresado;
+    }
+   
+    
+    
     public Productos() {
     }
 
@@ -66,6 +87,18 @@ public class Productos {
         this.posicionProducto.setEstante(estante);
         this.posicionProducto.setStreed(cajon);
         this.posicionProducto.setAvenue(compartimento);
+    }
+     public void setPosicionProducto(int estante) {
+        this.posicionProducto.setEstante(estante);
+        
+    }
+
+    public boolean isIngresado() {
+        return ingresado;
+    }
+
+    public void setIngresado(boolean ingresado) {
+        this.ingresado = ingresado;
     }
 
 

@@ -6,7 +6,13 @@
 package amazondrive;
 import java.util.TreeMap;
 import becker.robots.*;
+import static ch.aplu.util.BaseTimer.delay;
+import static ch.aplu.util.GWindow.delay;
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Horacio
@@ -16,8 +22,8 @@ public class BodegaDrive {
     private  Estantes [] estante=new Estantes [20];
     private  RobotDrive [] robotdrive=new RobotDrive[10];
    private Empleados [] empleado=new Empleados[2];
-   private TreeMap<Integer,Productos>productosBodega;
-  private   Productos[] produtosaIngresar=new Productos[10];
+  private   ArrayList<Productos> productos=new ArrayList();
+  
    
     /**
      * @deprecated: inicializa todos los objetos que estan dentro de la bodega
@@ -87,18 +93,28 @@ public BodegaDrive() {
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //colocacion de productos
-     produtosaIngresar[0]=new Productos(1,"Refisal","Canasta Familiar");
-     produtosaIngresar[1]=new Productos(2,"Samsung Galaxy j7","tecnologia");
-      produtosaIngresar[2]=new Productos(3,"Maus","Tecnologia");
-     produtosaIngresar[3]=new Productos(4,"computador","tecnologia");
-      produtosaIngresar[4]=new Productos(5,"pasta","Canasta Familiar");
-     produtosaIngresar[5]=new Productos(6,"smart tv","tecnologia");
-      produtosaIngresar[6]=new Productos(8,"huevosFricar","Canasta Familiar");
-     produtosaIngresar[7]=new Productos(7,"Multimetro fuke","tecnologia");
-      produtosaIngresar[8]=new Productos(10,"lecheecono","Canasta Familiar");
-     produtosaIngresar[9]=new Productos(9,"Play station 5","tecnologia");
-     
+     Random random=new Random();
+    for (int i = 0; i < 8; i++) {
+        
+    Productos productox=new Productos(random.nextInt(),"Refisal","Canasta Familiar",false,false);
+     Productos productok=new Productos(random.nextInt(),"Samsung Galaxy j7","tecnologia",false,false);
+      Productos productoz=new Productos(random.nextInt(),"Maus","Tecnologia",false,false);
+     Productos productol=new Productos(random.nextInt(),"computador","tecnologia",false,false);
+      Productos producton=new Productos(random.nextInt(),"pasta","Canasta Familiar",false,false);
+     this.productos.add(productox);
+      this.productos.add(productok);
+       this.productos.add(productoz);
+     this.productos.add(productol);
+      this.productos.add(producton);
+    }
+    /////////////////////////////////////////////////////////////////////////////////////////////
     
+    
+    
+    
+    
+           
+     
     
     }
 public Estantes[] getEstante() {
@@ -119,6 +135,34 @@ public City getCity() {
 public void setCity(City city) {
         this.city = city;
     }
+
+    public ArrayList<Productos> getProductos() {
+        return productos;
+    }
+
+    public void setProductos(ArrayList<Productos> productos) {
+        this.productos = productos;
+    }
+  public Empleados[] getEmpleado() {
+        return empleado;
+    }
+public void setEmpleado(Empleados[] empleado) {
+        this.empleado = empleado;
+    }
+
+    
+
+   
+
+
+
+
+
+
+
+
+
+
 /**
  * @deprecated: busca los robot que estar sin hacer nada y los pone a hacer algo
  * @return 
@@ -130,14 +174,10 @@ public int robotsDisponibles(){
                 
             }
         }
-     return 990;   
+     JOptionPane.showMessageDialog(null,"o hay robots diponibles","error",JOptionPane.ERROR_MESSAGE);
+        return 0;   
     }
-public Empleados[] getEmpleado() {
-        return empleado;
-    }
-public void setEmpleado(Empleados[] empleado) {
-        this.empleado = empleado;
-    }
+
 /**
  * @deprecated: para no poner tanto codigo repetido se utiliza esta para que el robot camine ciertas posiciones
  * @param b
@@ -158,68 +198,23 @@ public  int estantesDisponibles (){
      for (int i = 0; i < 20; i++) {
          for (int j = 0; j < 3; j++) {
              for (int k = 0; k < 7; k++) {
-               if (this.estante[i].getcajonProducto()[j][k]==null&&this.estante[i].isEstado()==false){
+               if (this.estante[i].getCajonProducto()[j][k]==null&&this.estante[i].isEstado()==false){
                  return i;
                }}}}    
    return -1; 
 }
-public TreeMap<Integer, Productos> getProductosBodega() {
-        return productosBodega;
-    }
-public void setProductosBodega(TreeMap<Integer, Productos> productosBodega) {
-        this.productosBodega = productosBodega;
-    }
-public Productos[] getProdutosaIngresar() {
-        return produtosaIngresar;
-    }
-public void setProdutosaIngresar(Productos[] produtosaIngresar) {
-        this.produtosaIngresar = produtosaIngresar;
-    }
-
-    
-    /**
-     * @deprecated: lo que se queria llegar con este metodo era que pudiera meter en un Treemap todos los productos que estaban en los estantes 
-     * para que se pudiera hacer un inventario; pero hay un null punter.exeption o como sea no compila
-     * @return 
-     */
-     public TreeMap inventario(){
-         for (int i = 0; i < 20; i++) {
-         for (int j = 0; j < 3; j++) {
-             for (int k = 0; k < 7; k++) {
-              if(this.estante[i].getcajonProducto()[j][k]!=null){   
-              this.productosBodega.put(this.estante[i].getcajonProducto()[j][k].getIdentificador(),this.estante[i].getcajonProducto()[j][k]);
-           }}}}
-    return this.productosBodega;
-    }  
-    
-     /**
-      * @deprecated: lo que se quria hacer con este metodo era  mostar todos los productos que estan disponibles, en el inventario
-      * para que el usuario pudiera saber el identificador del producto y asi pudiera pedirlo a amazaon; como se hace en la vida real
-      */
-    public void mostrarInventario(){
-        inventario();
-        for (int i = 0; i < this.productosBodega.size(); i++) {
-            System.out.println("la"+this.productosBodega.get(i)+"lo"+i);
-        }
-  
-        
-        
-    }
-    
-
-
-    /**
+ /**
      * @deprecated: funcion creada para buscar un producto[i] en todos los estantes mediante un identificador 
      * metodo utilizado en amazon, pero no compila es una idea para abordar el envio de un producto
      * @param:Integer identificadorProducto
      * @return 
      */
     
-    public Posicion buscarInventarioProducto(int identificadorProducto){
-       inventario();
-      return this.productosBodega.get(identificadorProducto).getPosicionProducto();
+    public int buscarInventarioProducto(int idicedelproducto){
+       Random ran=new Random();
+        int a =ran.nextInt(20);
        
-               
+       return a;
     }
 
     /**
@@ -229,7 +224,13 @@ public void setProdutosaIngresar(Productos[] produtosaIngresar) {
      * @param productodeInicio
      * @param productoFinal 
      */
-   public  void RecogerEstante(Productos producto[],int productodeInicio, int productoFinal){
+   public  void RecogerEstante(ArrayList<Productos> producto){
+    
+    new Thread(){
+       
+     public void run(){
+        
+         
      String n="NORTH";
      String s="SOUTH";// para hacer la programacion mas facil
      String e="EAST";
@@ -279,7 +280,7 @@ public void setProdutosaIngresar(Productos[] produtosaIngresar) {
            robotdrive[a].getRobotDrive().move();
        }
      
-    empleado[0].almacenarProducto(producto, productodeInicio, productoFinal, estante[b]);// el empleado guarda los productos seleccionados en los estantes
+    empleado[0].almacenarProducto(producto,estante[b]);// el empleado guarda los productos seleccionados en los estantes
      robotdrive[a].face(e);robotdrive[a].getRobotDrive().move();robotdrive[a].getRobotDrive().move();robotdrive[a].face(n);
    
     as=robotdrive[a].getRobotDrive().getStreet()-estante[b].getPosicion().getStreed();
@@ -311,18 +312,24 @@ public void setProdutosaIngresar(Productos[] produtosaIngresar) {
         estante[b].setEstado(false);
         
    }
- /**
+    }.start();
+   }
+ 
+   /**
   * @deprecated: este metodo aborda el envio del producto, hace que el robot recoja el estante disponible; no obstante falla a la hora 
   * de buscar el producto dentro de los estantes para poder enviarlos
   * @param posicion 
   */
-  public void enviarProducto(ArrayList<Posicion>posicion){
-     String n="NORTH";// para hacer la programacion mas facil
+  public void enviarProducto(int identificador){
+   
+      new Thread(){
+      public void run(){
+      String n="NORTH";// para hacer la programacion mas facil
      String s="SOUTH";
      String e="EAST";
      String w="WEST";
      int a=robotsDisponibles();
-     int b=posicion.get(0).getEstante();
+     int b=buscarInventarioProducto(identificador);
      robotdrive[a].setEstado(true);
      estante[b].setEstado(true);
     robotdrive[a].setDir(1);
@@ -346,15 +353,44 @@ public void setProdutosaIngresar(Productos[] produtosaIngresar) {
       caminata(a,2,e);
       caminata(a,2,s);
       caminata(a,9,s);
+       
+          try {
+              Thread.sleep(100);
+          } catch (InterruptedException ex) {
+              Logger.getLogger(BodegaDrive.class.getName()).log(Level.SEVERE, null, ex);
+          }
+      caminata(a,1,w);
+       
+      as=robotdrive[a].getRobotDrive().getAvenue()-robotdrive[a].getPosicionfija().getAvenue();
+       for (int i = 0; i < as; i++) {
+           robotdrive[a].getRobotDrive().move();
+       }robotdrive[a].face(s);robotdrive[a].getRobotDrive().move();robotdrive[a].face(n);
+       
+       robotdrive[a].setEstado(false);
+        estante[b].setEstado(false);
       
-      empleado[1].entregaProducto(estante[b], posicion); // ESTO ES LO QUE HP NO COMPILA
+      
+      }
+      }.start();
       
      
       
   }
 
+  public void ingresarProductos(ArrayList<Productos>productos){
+    int unidades=productos.size()/10;
+   for (int i = 0; i < unidades+1; i++) {
+               RecogerEstante(productos);
+          }
+   
+      
+ 
+  
+    }}
+  
 
-}
+ 
+
     
     
 

@@ -30,6 +30,9 @@ public class Estantes {
        setPosicion(a, b);
        this.estado=false;
        this.identificador=identificador;
+       
+            
+        
     }
 
    
@@ -41,14 +44,25 @@ public class Estantes {
         this.identificador = identificador;
     }
 
-    public Productos[][] getcajonProducto() {
+    public Productos[][] getCajonProducto() {
         return cajonProducto;
     }
 
-    public void setcajonProducto(Productos[] producto, int a, int b, int c) {
-        this.cajonProducto[a][b] = producto[c];
-      
+    public void setCajonProducto(Productos[][] cajonProducto) {
+        this.cajonProducto = cajonProducto;
     }
+
+    public Posicion getPosiciondelcajon() {
+        return posiciondelcajon;
+    }
+
+    public void setPosiciondelcajon(Posicion posiciondelcajon) {
+        this.posiciondelcajon = posiciondelcajon;
+    }
+
+   
+
+    
 
     public Posicion getPosicion() {
         return posicion;

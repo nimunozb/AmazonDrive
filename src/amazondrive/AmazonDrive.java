@@ -12,43 +12,36 @@ import java.util.ArrayList;
  * @author Horacio
  */
 public class AmazonDrive {
- private static BodegaDrive bodega;
+ private  BodegaDrive bodega;
 // static Posicion posicionk=new Posicion(0,0,1);
  //private static ArrayList<UsuarioAmazonDrive>usuarios =new ArrayList<>();
  
 // private static thing    
     
-    public static void main(String[] args) {
-      AmazonDrive amazon=new AmazonDrive();
-      ArrayList<Posicion>posicion=new ArrayList<>();
-      UsuarioAmazonDrive usuariof=new UsuarioAmazonDrive("Fabian Andres Giraldo",96549129,1234);
-     
-      amazon.bodega.RecogerEstante(bodega.getProdutosaIngresar(),0,9);// teniento un array de productos a ingresar, este metodo hace que 
-                                                         //el robot recoja el estante disponible e introdusca los productos en los estantes
-    
+  
 
-// usuariof.hacerPedido(amazon);
-     // posicion.add(posicionk);
-     // bodega.enviarProducto(posicion);
-       
-   }
-
-    public AmazonDrive() {
+    public AmazonDrive(BodegaDrive bodega) {
     
      
-     bodega=new BodegaDrive();
+     this.bodega=bodega;
      
      
     }
 
-    public static BodegaDrive getBodega() {
+    public  BodegaDrive getBodega() {
         return bodega;
     }
 
-    public static void setBodega(BodegaDrive bodega) {
-        AmazonDrive.bodega = bodega;
+    public void setBodega(BodegaDrive bodega) {
+       this.bodega=bodega;
     }
 
+    public AmazonDrive() {
+    }
+
+        
+    
+    
     /**
      * @deprecated: lo que tenia pensado de este metodo es que dado la cantidad de pedidos, los identificadores de los productos
      * y la cantidad de cada producto, se pudiera enviar el producto, con la ayuda del metodo enviar producto de bodega
@@ -56,8 +49,8 @@ public class AmazonDrive {
      * @param cantidad 
      */
     
-  public static void buscarPedido(ArrayList<Integer>identificador,ArrayList<Integer>cantidad){ 
-      ArrayList<Posicion>posicionEstante=new ArrayList<>();
+  public  void buscarPedido(ArrayList<Integer>identificador,ArrayList<Integer>cantidad){ 
+    /*  ArrayList<Posicion>posicionEstante=new ArrayList<>();
       for (int i = 0; i <cantidad.size(); i++) {//repite tanta veces como pedidos de productos
           for (int j = 0; j <cantidad.get(i); j++) {//repite por la catidad de unidades de un producto
               int a=identificador.get(i);
@@ -69,7 +62,7 @@ public class AmazonDrive {
           }} bodega.enviarProducto(estantesComun);
   
   
- 
+ */
   
   }
 
